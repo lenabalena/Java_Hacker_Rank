@@ -1,0 +1,55 @@
+/*
+A string containing only parentheses is balanced if the following is true: 1. if it is an empty string 2. if A and B are correct, AB is correct, 3. if A is correct, (A) and {A} and [A] are also correct.
+
+Examples of some correctly balanced strings are: "{}()", "[{()}]", "({()})"
+
+Examples of some unbalanced strings are: "{}(", "({)}", "[[", "}{" etc.
+
+Given a string, determine if it is balanced or not.
+*/
+import java.util.*;
+class Solution{
+	public static boolean isBalanced(String s)
+    {
+        Stack <Character> stack=new Stack<Character>();
+        for(int i=0;i<s.length();i++)
+        {   char c=s.charAt(i);
+            if(c=='(' || c=='{' || c=='[') stack.push(c);
+            if(c==')' || c=='}' || c==']')
+            {
+                if(stack.isEmpty()) return false;
+                if(c==')')
+                {
+                    if(stack.peek()=='(')
+                    {
+                        stack.pop();
+                    }
+                    else return false;
+                }
+                if(c=='}')
+                {
+                    if(stack.peek()=='{')
+                    {stack.pop();} else return false;
+                }
+                if(c==']')
+                {
+                    if(stack.peek()=='[')stack.pop(); else return false;
+                }
+            }
+
+        }
+        return stack.isEmpty();
+        
+    }
+
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+		 String string=sc.next();
+         System.out.println(isBalanced(string));}
+	
+            
+            }
+           
+		}
